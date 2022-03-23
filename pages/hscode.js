@@ -2,29 +2,27 @@ import { useState ,useEffect} from "react";
 import StickyHeadTable from '../materialui/pagenation_hscode'
 
 export default function Hscode(){
-    const[data,setData]=useState(null);
-    const [row,setRow]=useState([])
+    const[hsdata,setHsData]=useState(null);
+    const [hs_row,setHsRow]=useState([])
   useEffect(()=>{
-    console.log("enter....");
-   fetch("https://staging-api.wizfreight.com/v1/hs-codes").then((res)=>res.json()).then((dt)=>{setData(dt)});
-   console.log("exit",data);
+   fetch("https://staging-api.wizfreight.com/v1/hs-codes").then((res)=>res.json()).then((dt)=>{setHsData(dt)});
   },[])
 
   useEffect(()=>{
-    if(data){
-        const rw=data.hs_codes.map((curElem)=> { 
+    if(hsdata){
+        const rows=hsdata.hs_codes.map((curElem)=> { 
            const Name=curElem.name;
            const Code=curElem.code ;
             return {Name,Code}
         })
-        setRow(rw);
+        setHsRow(rows);
     }      
 
    },[data])
 
   return (
     <div className="App">
-      {data && < StickyHeadTable rows={row} />}
+      {data && < StickyHeadTable rows={hs_row} />}
       </div>
   );
 }
