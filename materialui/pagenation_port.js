@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { v4 as uuid_v4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 
 const columns = [
@@ -50,7 +50,7 @@ export default function StickyHeadTable(props) {
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                key={uuid_v4()}
+                key={uuidv4()}
                   align={column.align}
                 >
                   {column.label}
@@ -67,7 +67,7 @@ export default function StickyHeadTable(props) {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={uuid_v4()} align={column.align}>
+                        <TableCell key={uuidv4()} align={column.align}>
                           {value}
                         </TableCell>
                       );

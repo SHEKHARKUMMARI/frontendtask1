@@ -28,7 +28,7 @@ export default function Port(){
   return (
     <div className="App">
       <Heading />
-    {data&&<StickyHeadTable rows={row} />}
+    {portdata&&<StickyHeadTable rows={row} />}
       </div>
   );
 }
