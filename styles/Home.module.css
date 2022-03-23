@@ -1,5 +1,10 @@
 .container {
   padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fafafa;
+  height: 95vh;
 }
 
 .main {
@@ -12,7 +17,7 @@
   align-items: center;
 }
 
-.footer {
+/* .footer {
   display: flex;
   flex: 1;
   padding: 2rem 0;
@@ -26,7 +31,7 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-}
+} */
 
 .title a {
   color: #0070f3;
@@ -106,6 +111,46 @@
 .logo {
   height: 1em;
   margin-left: 0.5rem;
+}
+
+/* Homepage Styling */
+.home_page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 280px;
+  color: rgb(77, 77, 77);
+  text-align: center;
+  margin: 50px;
+  
+}
+
+.page_font{
+  font-size: 60px;
+  font-weight: 700;
+}
+
+.home_page:hover,
+.home_page:focus{
+  color: white;
+  background-color:rgb(134, 134, 134);
+  border-radius: 10px;
+  transition: .3s;
+}
+
+.footer{
+  text-align: center;
+  color:rgb(134, 134, 134);
+  /* background-color: #fafafa; */
+}
+
+.back{
+  margin-left: 20px;
+}
+
+.back:hover{
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
