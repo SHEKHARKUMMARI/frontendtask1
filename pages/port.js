@@ -3,7 +3,7 @@ import StickyHeadTable from "../materialui/pagenation_port"
 import Heading from "../materialui/ports_heading"
 
 export default function Port(){
-    const [data, setData] = useState(null);
+    const [portdata, setData] = useState(null);
       const [row,setRow]=useState([]);
 
   useEffect(()=>{
@@ -11,8 +11,8 @@ export default function Port(){
   },[])
 
   useEffect(()=>{
-   if(data){
-       const rw=data.ports.map((curElem)=> { 
+   if(portdata){
+       const port_row=portdata.ports.map((curElem)=> { 
           const Name=curElem.name;
           const Code=curElem.info.city.info.country.code ;
           const City=curElem.info.city.name;
@@ -20,11 +20,11 @@ export default function Port(){
           const Country=curElem.info.city.info.country.name;
            return {Name,Code,City,State,Country}
        })
-       setRow(rw);
+       setRow(port_row);
    }      
    
-  },[data])
-  useEffect(()=>{console.log(row)});
+  },[portdata])
+  
   return (
     <div className="App">
       <Heading />
