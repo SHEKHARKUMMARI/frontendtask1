@@ -1,6 +1,8 @@
 import { useState ,useEffect} from "react";
 import StickyHeadTable from "../materialui/pagenation_port"
 import Heading from "../materialui/ports_heading"
+import Link from "next/link"
+import styles from "../styles/Home.module.css"
 
 export default function Port(){
     const [portdata, setData] = useState(null);
@@ -29,6 +31,9 @@ export default function Port(){
     <div className="App">
       <Heading />
     {portdata&&<StickyHeadTable rows={row} />}
+      <Link href="/">
+        <p className={styles.back}> Back </p>
+      </Link>
       </div>
   );
 }
