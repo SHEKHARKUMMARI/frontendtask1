@@ -18,11 +18,11 @@ export default function Hscode(){
         setHsRow(rows);
     }      
 
-   },[data])
+   },[hsdata])
 
   return (
     <div className="App">
-      {data && < StickyHeadTable rows={hs_row} />}
+      {hsdata && < StickyHeadTable rows={hs_row} />}
       </div>
   );
 }
