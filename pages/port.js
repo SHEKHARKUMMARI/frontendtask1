@@ -1,5 +1,5 @@
 import { useState ,useEffect} from "react";
-import StickyHeadTable from "../materialui/pagenation"
+import StickyHeadTable from "../materialui/pagenation_port"
 export default function Port(){
     const [data, setData] = useState(null);
       const [row,setRow]=useState([]);
