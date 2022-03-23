@@ -38,11 +38,10 @@ export default function StickyHeadTable(props) {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  console.log("rows from head=",rows);
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 600 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
+import { useState ,useEffect} from 'react';
+import ResultBox from './resultbox';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,8 +53,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar({data}) {
+  const [searchText,setSearchtext]=useState("");
+  const [result,setResult]=useState([]);
+  const handleInputChange=(e)=>{
+    const value=e.target.value;
+    setSearchtext(value);
+  }
+  useEffect(()=>{
+    if(searchText){
+      const resultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchText)||ele.Code.includes(searchText)).map((ele)=><div>{ele.Name}</div>);
+      setResult(resultsArray);
+     }
+  },[searchText])
   return (
+    <>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
@@ -80,10 +95,15 @@ export default function SearchAppBar() {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              value={searchText}
+              onChange={handleInputChange}
             />
           </Search>
         </Toolbar>
       </AppBar>
     </Box>
+    {searchText&&result&&data&&<ResultBox data={result} />}
+    
+    </>
   );
 }

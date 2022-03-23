@@ -24,14 +24,13 @@ export default function StickyHeadTable(props) {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  console.log("rows from head=",rows);
 
   return (
     <>
-    <SearchBar />
+    <SearchBar data={rows} />
 
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ maxHeight: 670 }}  >
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
