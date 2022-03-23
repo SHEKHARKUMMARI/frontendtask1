@@ -1,14 +1,14 @@
 import { useState ,useEffect} from "react";
 import StickyHeadTable from "../materialui/pagenation_port"
 export default function Port(){
-    const [data, setData] = useState(null);
+    const [portdata, setData] = useState(null);
       const [row,setRow]=useState([]);
   useEffect(()=>{
    fetch("https://staging-api.wizfreight.com/v1/ports").then((res)=>res.json()).then((dt)=>{setData(dt)});
   },[])
   useEffect(()=>{
-   if(data){
-       const rw=data.ports.map((curElem)=> { 
+   if(portdata){
+       const port_row=portdata.ports.map((curElem)=> { 
           const Name=curElem.name;
           const Code=curElem.info.city.info.country.code ;
           const City=curElem.info.city.name;
@@ -16,14 +16,14 @@ export default function Port(){
           const Country=curElem.info.city.info.country.name;
            return {Name,Code,City,State,Country}
        })
-       setRow(rw);
+       setRow(port_row);
    }      
    
-  },[data])
-  useEffect(()=>{console.log(row)});
+  },[portdata])
+  
   return (
     <div className="App">
-    {data&&<StickyHeadTable rows={row} />}
+    {portdata&&<StickyHeadTable rows={row} />}
       {/* {data&& data.ports.map((curElem)=> {
         return (
             <div key={curElem.id}>
