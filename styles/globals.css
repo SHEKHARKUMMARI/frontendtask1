@@ -14,3 +14,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.page_heading{
+  text-align: center;
+  background-color: rgb(56, 56, 56);
+  color: white;
+}
