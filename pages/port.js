@@ -4,17 +4,22 @@ import Heading from "../materialui/ports_heading"
 import Link from "next/link"
 import styles from "../styles/Home.module.css"
 
-export default function Port(){
-    const [portdata, setData] = useState(null);
-      const [row,setRow]=useState([]);
+export const getStaticProps = async() => {
+  const res = await fetch('https://staging-api.wizfreight.com/v1/ports');
+  const data = await res.json();
+  return {
+      props: {
+          data,
+      }
+  }
+}  
+
+export default function Port({data}){
+    const [row, setRow] = useState([]);
 
   useEffect(()=>{
-   fetch("https://staging-api.wizfreight.com/v1/ports").then((res)=>res.json()).then((dt)=>{setData(dt)});
-  },[])
-
-  useEffect(()=>{
-   if(portdata){
-       const port_row=portdata.ports.map((curElem)=> { 
+   if(data){
+       const port_row=data.ports.map((curElem)=> { 
           const Name=curElem.name;
           const Code=curElem.info.city.info.country.code ;
           const City=curElem.info.city.name;
@@ -25,12 +30,12 @@ export default function Port(){
        setRow(port_row);
    }      
    
-  },[portdata])
+  },[data])
   
   return (
     <div className="App">
       <Heading />
-    {portdata&&<StickyHeadTable rows={row} />}
+    {data&&<StickyHeadTable rows={row} />}
       <Link href="/">
         <p className={styles.back}> Back </p>
       </Link>
