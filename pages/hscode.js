@@ -4,14 +4,23 @@ import Link from "next/link"
 import styles from "../styles/Home.module.css"
 
 
+export const getStaticProps = async() => {
+  const res = await fetch("https://staging-api.wizfreight.com/v1/hs-codes");
+  const hsdata = await res.json();
+  return {
+      props: {
+        hsdata,
+      }
+  }
+}
 
-export default function Hscode(){
-    const[hsdata,setHsData]=useState(null);
+
+
+
+export default function Hscode({hsdata}){
     const [hs_row,setHsRow]=useState([])
 
-  useEffect(()=>{
-   fetch("https://staging-api.wizfreight.com/v1/hs-codes").then((res)=>res.json()).then((dt)=>{setHsData(dt)});
-  },[])
+  
 
   useEffect(()=>{
     if(hsdata){
