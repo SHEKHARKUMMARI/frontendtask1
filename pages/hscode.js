@@ -38,7 +38,7 @@ export default function Hscode({hsdata}){
     <div className="App">
       {hsdata && < StickyHeadTable rows={hs_row} />}
       <Link href="/">
-        <p className={styles.back}> Back </p>
+        <a className={styles.back}> Back </a>
       </Link>
       </div>
   );

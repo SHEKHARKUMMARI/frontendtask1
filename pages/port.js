@@ -37,7 +37,7 @@ export default function Port({data}){
       <Heading />
     {data&&<StickyHeadTable rows={row} />}
       <Link href="/">
-        <p className={styles.back}> Back </p>
+        <a className={styles.back}> Back </a>
       </Link>
       </div>
   );
