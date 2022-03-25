@@ -1,8 +1,9 @@
 import { useState ,useEffect} from "react";
 import StickyHeadTable from "../materialui/pagenation_port"
 import Heading from "../materialui/ports_heading"
-import Link from "next/link"
 import styles from "../styles/Home.module.css"
+import Backbutton from '../materialui/backbutton'
+
 
 export const getStaticProps = async() => {
   const res = await fetch('https://staging-api.wizfreight.com/v1/ports');
@@ -36,9 +37,7 @@ export default function Port({data}){
     <div className="App">
       <Heading />
     {data&&<StickyHeadTable rows={row} />}
-      <Link href="/">
-        <a className={styles.back}> Back </a>
-      </Link>
+      <Backbutton />
       </div>
   );
 }

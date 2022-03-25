@@ -11,17 +11,18 @@
   "dependencies": {
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
-    "@material-ui/core": "^4.12.3",
     "@mui/icons-material": "^5.5.1",
     "@mui/material": "^5.5.2",
     "@mui/styled-engine-sc": "^5.5.2",
-    "next": "12.1.0",
+    "next": "^12.1.1-canary.17",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "styled-components": "^5.3.3",
-    "uuidv4": "^6.2.12"
+    "vercel": "^24.0.1"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.5.4",
+    "babel-eslint": "^10.1.0",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0"
   }

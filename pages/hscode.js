@@ -2,7 +2,7 @@ import { useState ,useEffect} from "react";
 import StickyHeadTable from "../materialui/pagenation_hscode"
 import Link from "next/link"
 import styles from "../styles/Home.module.css"
-
+import Backbutton from '../materialui/backbutton'
 
 export const getStaticProps = async() => {
   const res = await fetch("https://staging-api.wizfreight.com/v1/hs-codes");
@@ -36,10 +36,8 @@ export default function Hscode({hsdata}){
 
   return (
     <div className="App">
-      {hsdata && < StickyHeadTable rows={hs_row} />}
-      <Link href="/">
-        <a className={styles.back}> Back </a>
-      </Link>
+      {hsdata && <StickyHeadTable rows={hs_row} />}
+        <Backbutton />
       </div>
   );
 }
