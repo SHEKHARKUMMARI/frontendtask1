@@ -1,7 +1,6 @@
 import { useState ,useEffect} from "react";
 import StickyHeadTable from "../materialui/pagenation_port"
 import Heading from "../materialui/ports_heading"
-import styles from "../styles/Home.module.css"
 import Backbutton from '../materialui/backbutton'
 
 
@@ -35,7 +34,7 @@ export default function Port({data}){
   
   return (
     <div className="App">
-      <Heading />
+      {/* <Heading /> */}
     {data&&<StickyHeadTable rows={row} />}
       <Backbutton />
       </div>
