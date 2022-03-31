@@ -54,18 +54,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar({data,handleSearchResult}) {
-  const [searchText,setSearchtext]=useState("");
+  const [searchInputText,setSearchInputtext]=useState("");
   // const [result,setResult]=useState([]);
   const handleInputChange=(e)=>{
-    const value=e.target.value;
-    setSearchtext(value);
+    setSearchInputtext(e.target.value);
   }
   useEffect(()=>{
-    if(searchText){
-      const resultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchText)||ele.Code.includes(searchText));
-      handleSearchResult(resultsArray);
+    if(searchInputText){
+      const searchresultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchInputText)||ele.Code.includes(searchInputText));
+      handleSearchResult(searchresultsArray);
      }
-  },[searchText])
+  },[searchInputText])
   return (
     <>
     <Box sx={{ flexGrow: 1 }}>
@@ -95,7 +94,7 @@ export default function SearchAppBar({data,handleSearchResult}) {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              value={searchText}
+              value={searchInputText}
               onChange={handleInputChange}
             />
           </Search>
