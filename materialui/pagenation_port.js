@@ -8,6 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 // import { v4 as uuidv4 } from 'uuid';
+import SearchBar from './searchbar_ports';
+import { useState,useEffect } from 'react';
 
 
 const columns = [
@@ -35,14 +37,29 @@ const columns = [
 export default function StickyHeadTable(props) {
     const {rows}=props;
   const [page, setPage] = React.useState(0);
+  const [searchResult,setSearchResult]=useState();
+  const [displayData,setDisplayData]=useState();
   const rowsPerPage=10;
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  return (
+  const handleSearchResult=(val)=>{
+    setSearchResult(val);
+  }
+  useEffect(()=>{
+   if(searchResult)
+   setDisplayData(searchResult);
+   else{
+    setDisplayData(rows);
+   }
+  },[searchResult,rows])
 
+  return (
+  <>
+  <SearchBar data={rows} handleSearchResult={handleSearchResult} />
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 600 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -59,7 +76,7 @@ export default function StickyHeadTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            { displayData&& displayData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row,index) => {
                 return (
@@ -87,5 +104,6 @@ export default function StickyHeadTable(props) {
         onPageChange={handleChangePage}
       />
     </Paper>
+  </>
   );
 }

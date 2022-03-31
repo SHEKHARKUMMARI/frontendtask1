@@ -62,7 +62,7 @@ export default function SearchAppBar({data,handleSearchResult}) {
   }
   useEffect(()=>{
     if(searchText){
-      const resultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchText)||ele.Code.includes(searchText));
+      const resultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchText) || ele.City.toLowerCase().includes(searchText)|| ele.State.toLowerCase().includes(searchText) || ele.Code.includes(searchText) || ele.Country.toLowerCase().includes(searchText));
       handleSearchResult(resultsArray);
      }
   },[searchText])
@@ -86,7 +86,7 @@ export default function SearchAppBar({data,handleSearchResult}) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            HS Code
+            Port
           </Typography>
           <Search>
             <SearchIconWrapper>
