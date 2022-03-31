@@ -53,17 +53,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({data}) {
+export default function SearchAppBar({data,handleSearchResult}) {
   const [searchText,setSearchtext]=useState("");
-  const [result,setResult]=useState([]);
+  // const [result,setResult]=useState([]);
   const handleInputChange=(e)=>{
     const value=e.target.value;
     setSearchtext(value);
   }
   useEffect(()=>{
     if(searchText){
-      const resultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchText)||ele.Code.includes(searchText)).map((ele)=><div>{ele.Name}</div>);
-      setResult(resultsArray);
+      const resultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchText)||ele.Code.includes(searchText));
+      handleSearchResult(resultsArray);
      }
   },[searchText])
   return (
@@ -102,7 +102,7 @@ export default function SearchAppBar({data}) {
         </Toolbar>
       </AppBar>
     </Box>
-    {searchText&&result&&data&&<ResultBox data={result} />}
+    {/* {searchText&&result&&data&&<ResultBox data={result} />} */}
     
     </>
   );
