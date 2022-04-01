@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar({data,handleSearchResult}) {
+export default function SearchAppBar({data,handleSearchResult,heading}) {
   const [searchText,setSearchText]=useState("");
   
   const handleInputChange=(event)=>{
@@ -96,7 +96,7 @@ export default function SearchAppBar({data,handleSearchResult}) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            Port
+            {heading}
           </Typography>
           <Search>
             <SearchIconWrapper>

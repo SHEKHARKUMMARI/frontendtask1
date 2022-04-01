@@ -12,7 +12,7 @@ import { useState,useEffect } from 'react';
 
 
 export default function StickyHeadTable(props) {
-  const {rows, columns} = props;
+  const {rows, columns ,heading} = props;
 
   const [page, setPage] = React.useState(0);
   const [searchResult,setSearchResult]=useState();
@@ -37,7 +37,7 @@ export default function StickyHeadTable(props) {
 
   return (
     <>
-    <SearchBar data={rows} handleSearchResult={handleSearchResult} />
+    <SearchBar data={rows} handleSearchResult={handleSearchResult} heading={heading} />
 
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 670 }}  >

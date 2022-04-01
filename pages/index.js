@@ -14,10 +14,10 @@ export default function Home() {
       <div  className={styles.container}>
       
       <div className={styles.home_page}>
-        <Link href="/hscode"><a className={styles.page_font}>HS Code</a></Link>
+        <Link href="/hscode"><a className={styles.page_font}>HS CODES</a></Link>
       </div>
       <div className={styles.home_page}>
-        <Link href="/port"><a className={styles.page_font}>Port page</a></Link>
+        <Link href="/port"><a className={styles.page_font}>PORTS  PAGE</a></Link>
       </div>
 
       </div>

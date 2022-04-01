@@ -55,7 +55,7 @@ export default function HsCode({hsData}){
    
   return (
     <div className="App">
-      {hsData && columns && <StickyHeadTable columns={columns} rows={hs_row} />}
+      {hsData && columns && <StickyHeadTable columns={columns} rows={hs_row}  heading="HS CODES"/>}
         <BackButton />
       </div>
   );

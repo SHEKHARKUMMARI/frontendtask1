@@ -50,7 +50,7 @@ export default function Port({data}){
 
   return (
     <div className="App">
-    {data&& columns && <StickyHeadTable columns={columns} rows={row} />}
+    {data&& columns && <StickyHeadTable columns={columns} rows={row} heading="PORTS PAGE" />}
       <BackButton />
       </div>
   );
