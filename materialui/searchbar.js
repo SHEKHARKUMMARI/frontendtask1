@@ -6,7 +6,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState ,useEffect} from 'react';
 
@@ -54,17 +53,31 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar({data,handleSearchResult}) {
-  const [searchInputText,setSearchInputtext]=useState("");
+  const [searchText,setSearchtext]=useState("");
+
   // const [result,setResult]=useState([]);
-  const handleInputChange=(e)=>{
-    setSearchInputtext(e.target.value);
+  
+  const handleInputChange=(event)=>{
+    setSearchtext(event.target.value);
   }
+
+
   useEffect(()=>{
-    if(searchInputText){
-      const searchresultsArray=data.filter((ele)=>ele.Name.toLowerCase().includes(searchInputText)||ele.Code.includes(searchInputText));
-      handleSearchResult(searchresultsArray);
+    if(searchText){
+      const lowercasedFilter = searchText.toLowerCase();
+      const filteredData = data.filter(item => {
+        return Object.keys(item).some(key =>
+          item[key].toLowerCase().includes(lowercasedFilter)
+        );
+      });
+      handleSearchResult(filteredData);
      }
-  },[searchInputText])
+  },[searchText])
+
+  
+
+  
+
   return (
     <>
     <Box sx={{ flexGrow: 1 }}>
@@ -85,7 +98,7 @@ export default function SearchAppBar({data,handleSearchResult}) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            HS Code
+            Port
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -94,7 +107,7 @@ export default function SearchAppBar({data,handleSearchResult}) {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
-              value={searchInputText}
+              value={searchText}
               onChange={handleInputChange}
             />
           </Search>

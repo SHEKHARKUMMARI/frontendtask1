@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 // import { v4 as uuidv4 } from 'uuid';
-import SearchBar from './searchbar_ports';
+import SearchBar from './searchbar';
 import { useState,useEffect } from 'react';
 
 
@@ -36,11 +36,11 @@ const columns = [
 
 export default function StickyHeadTable(props) {
     const {rows}=props;
+    console.log(rows)
   const [page, setPage] = React.useState(0);
   const [searchResult,setSearchResult]=useState();
   const [displayData,setDisplayData]=useState();
   const rowsPerPage=10;
-
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -55,6 +55,7 @@ export default function StickyHeadTable(props) {
    else{
     setDisplayData(rows);
    }
+
   },[searchResult,rows])
 
   return (
@@ -98,7 +99,7 @@ export default function StickyHeadTable(props) {
       <TablePagination
         rowsPerPageOptions={10}
         component="div"
-        count={rows.length}
+        count={displayData ?.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

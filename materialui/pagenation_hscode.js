@@ -7,8 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import SearchBar from "./searchbar_hashcode"
+import SearchBar from "./searchbar"
 import { useState,useEffect } from 'react';
+
 
 // import { v4 as uuidv4 } from 'uuid';
 
@@ -81,7 +82,7 @@ export default function StickyHeadTable(props) {
       <TablePagination
         rowsPerPageOptions={10}
         component="div"
-        count={rows.length}
+        count={displayData ?.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
