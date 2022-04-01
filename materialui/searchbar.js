@@ -53,21 +53,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar({data,handleSearchResult}) {
-  const [searchText,setSearchtext]=useState("");
-
-  // const [result,setResult]=useState([]);
+  const [searchText,setSearchText]=useState("");
   
   const handleInputChange=(event)=>{
-    setSearchtext(event.target.value);
+    setSearchText(event.target.value);
   }
 
 
   useEffect(()=>{
     if(searchText){
-      const lowercasedFilter = searchText.toLowerCase();
+      const lowerCasedFilter = searchText.toLowerCase();
       const filteredData = data.filter(item => {
         return Object.keys(item).some(key =>
-          item[key].toLowerCase().includes(lowercasedFilter)
+          item[key].toLowerCase().includes(lowerCasedFilter)
         );
       });
       handleSearchResult(filteredData);
@@ -114,7 +112,6 @@ export default function SearchAppBar({data,handleSearchResult}) {
         </Toolbar>
       </AppBar>
     </Box>
-    {/* {searchText&&result&&data&&<ResultBox data={result} />} */}
     
     </>
   );

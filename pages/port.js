@@ -1,6 +1,6 @@
 import { useState ,useEffect} from "react";
-import StickyHeadTable from "../materialui/pagenation_port"
-import Backbutton from '../materialui/backbutton'
+import StickyHeadTable from "../materialui/pagination"
+import BackButton from '../materialui/backbutton'
 
 
 export const getStaticProps = async() => {
@@ -15,6 +15,7 @@ export const getStaticProps = async() => {
 
 export default function Port({data}){
     const [row, setRow] = useState([]);
+    const [columns, setColumns] = useState([]);
 
   useEffect(()=>{
    if(data){
@@ -31,11 +32,26 @@ export default function Port({data}){
    
   },[data])
   
+
+
+
+  useEffect(() => {
+    if(row){
+      const tempData = row.length !== 0 ? Object.keys(row[0]).map(ele => {
+        return {
+          "id": ele,
+          "label": ele,
+        }
+      }): [];
+      setColumns(tempData);
+    }
+ }, [row])
+
+
   return (
     <div className="App">
-      {/* <Heading /> */}
-    {data&&<StickyHeadTable rows={row} />}
-      <Backbutton />
+    {data&& columns && <StickyHeadTable columns={columns} rows={row} />}
+      <BackButton />
       </div>
   );
 }

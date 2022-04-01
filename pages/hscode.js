@@ -1,43 +1,62 @@
 import { useState ,useEffect} from "react";
-import StickyHeadTable from "../materialui/pagenation_hscode"
-import Link from "next/link"
-import styles from "../styles/Home.module.css"
-import Backbutton from '../materialui/backbutton'
+import StickyHeadTable from "../materialui/pagination"
+import BackButton from '../materialui/backbutton'
 
 export const getStaticProps = async() => {
   const res = await fetch("https://staging-api.wizfreight.com/v1/hs-codes");
-  const hsdata = await res.json();
+  const hsData = await res.json();
   return {
       props: {
-        hsdata,
+        hsData,
       }
   }
 }
 
 
+export default function HsCode({hsData}){
+    const [hs_row,setHsRow]=useState([])  
+    const [columns, setColumns] = useState([]);
 
 
-export default function Hscode({hsdata}){
-    const [hs_row,setHsRow]=useState([])
 
-  
 
   useEffect(()=>{
-    if(hsdata){
-        const rows=hsdata.hs_codes.map((curElem)=> { 
+    if(hsData){
+        const rows=hsData.hs_codes.map((curElem)=> { 
            const Name=curElem.name;
            const Code=curElem.code ;
             return {Name,Code}
         })
+
+        
         setHsRow(rows);
     }      
 
-   },[hsdata])
+   },[hsData])
 
+
+   
+
+
+   useEffect(() => {
+      if(hs_row){
+        const tempData = hs_row.length !== 0 ? Object.keys(hs_row[0]).map(ele => {
+          return {
+            "id": ele,
+            "label": ele,
+          }
+        }): [];
+        setColumns(tempData);
+      }
+   }, [hs_row])
+
+
+
+   
   return (
     <div className="App">
-      {hsdata && <StickyHeadTable rows={hs_row} />}
-        <Backbutton />
+      {hsData && columns && <StickyHeadTable columns={columns} rows={hs_row} />}
+        <BackButton />
       </div>
   );
 }

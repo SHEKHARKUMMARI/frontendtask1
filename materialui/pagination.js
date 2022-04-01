@@ -11,20 +11,15 @@ import SearchBar from "./searchbar"
 import { useState,useEffect } from 'react';
 
 
-// import { v4 as uuidv4 } from 'uuid';
-
-const columns = [
-  { id: 'Name', label: 'Name'},
-  { id: 'Code', label: 'Code'},
-];
-
-
 export default function StickyHeadTable(props) {
-    const {rows}=props;
+  const {rows, columns} = props;
+
   const [page, setPage] = React.useState(0);
   const [searchResult,setSearchResult]=useState();
   const [displayData,setDisplayData]=useState();
   const rowsPerPage=10;
+    
+  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -51,7 +46,6 @@ export default function StickyHeadTable(props) {
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
-                    // key={uuidv4()}
                     align={column.align}
                   >
                     {column.label}
@@ -60,7 +54,7 @@ export default function StickyHeadTable(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              { displayData&& displayData
+              { displayData && displayData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row,index) => {
                   return (

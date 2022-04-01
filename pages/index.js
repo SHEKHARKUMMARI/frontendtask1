@@ -23,7 +23,7 @@ export default function Home() {
       </div>
 
       <footer>
-        <p className={styles.footer}>By - Shekhar | Pavan | Dinesh</p>
+        <p className={styles.footer}>By - Shekhar | Pavan | Dinesh </p>
       </footer>
       
     </div>
