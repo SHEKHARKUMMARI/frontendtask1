@@ -13,11 +13,12 @@ import Button from '@mui/material/Button';
 
 
 export default function StickyHeadTable(props) {
-  const {rows, columns ,heading} = props;
+  const {rows, columns ,heading,handleEditClick} = props;
 
   const [page, setPage] = React.useState(0);
   const [searchResult,setSearchResult]=useState();
   const [displayData,setDisplayData]=useState();
+  // const [wantToEdit,setWantToEdit]=useState(false);
   const rowsPerPage=10;
     
   
@@ -35,7 +36,11 @@ export default function StickyHeadTable(props) {
     setDisplayData(rows);
    }
   },[searchResult,rows])
+    const handleEditPortClick=(id)=>{
+      console.log("id=",id);
+      handleEditClick(id);
 
+     }
   return (
     <>
     <SearchBar data={rows} handleSearchResult={handleSearchResult} heading={heading} />
@@ -68,6 +73,7 @@ export default function StickyHeadTable(props) {
                           </TableCell> 
                         );
                       })}
+                      <Button variant="contained"  onClick={()=>handleEditPortClick(row[columns[0].id])} >Edit</Button>
                       <Button variant="contained">Delete</Button>
                     </TableRow>
                   );
