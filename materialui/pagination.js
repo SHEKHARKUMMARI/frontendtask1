@@ -9,6 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import SearchBar from "./searchbar"
 import { useState,useEffect } from 'react';
+import Button from '@mui/material/Button';
 
 
 export default function StickyHeadTable(props) {
@@ -64,9 +65,10 @@ export default function StickyHeadTable(props) {
                         return (
                           <TableCell  align={column.align}>
                             {value}
-                          </TableCell>
+                          </TableCell> 
                         );
                       })}
+                      <Button variant="contained">Delete</Button>
                     </TableRow>
                   );
                 })}
