@@ -8,6 +8,14 @@ export default async function getAllPersonById(req, res) {
     const result=statement.run(req.body.name,req.body.code,req.body.city,req.body.state,req.body.country,req.query.id);
     (await result).finalize();
   }
+
+  if(req.method === 'DELETE')
+  {
+    const statement = await  db.prepare(`DELETE FROM Port WHERE id=?`)
+    const result=statement.run(req.query.id);
+    (await result).finalize();
+  }
+
 const port=await db.get('SELECT*FROM Port WHERE id=?',[req.query.id]);
 
   res.json(port);

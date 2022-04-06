@@ -8,6 +8,7 @@ export default async function getAllPersonById(req, res) {
     const result=statement.run(req.body.name,req.body.code,req.body.city,req.body.state,req.body.country);
     (await result).finalize();
   }
+
 const port=await db.all('SELECT*FROM Port');
 
 
