@@ -23,7 +23,7 @@ export default function StickyHeadTable(props) {
     
 
   const  deleteport = async (id) =>{
-    const response = await fetch(`http://localhost:3000/api/ports/${id}`, {
+    await fetch(`http://localhost:3000/api/ports/${id}`, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json'
