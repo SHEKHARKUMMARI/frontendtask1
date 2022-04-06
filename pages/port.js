@@ -2,6 +2,9 @@ import { useState ,useEffect} from "react";
 import StickyHeadTable from "../materialui/pagination";
 import BackButton from '../materialui/backbutton';
 import { useRouter } from "next/router";
+import Button from '@mui/material/Button';
+import Link from 'next/link'
+
 export const getStaticProps = async() => {
   const res = await fetch('https://staging-api.wizfreight.com/v1/ports');
   const data = await res.json();
@@ -33,10 +36,10 @@ export default function Port({data}){
   // },[data])
   
 useEffect( async ()=>{
-const res=await fetch('http://localhost:3000/api/ports');
-const data=await res.json();
-console.log(data);
-setRow(data);
+  const res=await fetch('http://localhost:3000/api/ports');
+  const data=await res.json();
+  console.log(data);
+  setRow(data);
 },[])
 
 
@@ -59,6 +62,9 @@ setRow(data);
     <div className="App">
     {data&& columns && <StickyHeadTable columns={columns} rows={row} heading="PORTS PAGE" handleEditClick={handleEditClick} />}
       <BackButton />
+      <Link href='/addport'>
+          <Button variant="contained">Add Port</Button>
+      </Link>
       </div>
   );
 }
