@@ -20,6 +20,7 @@ const EditPort = () => {
       body: JSON.stringify(form) // body data type must match "Content-Type" header
     });
     console.log("resp=",response.json());
+    router.push('../port');
   
   }
   useEffect( async ()=>{
