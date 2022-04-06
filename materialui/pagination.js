@@ -21,6 +21,19 @@ export default function StickyHeadTable(props) {
   // const [wantToEdit,setWantToEdit]=useState(false);
   const rowsPerPage=10;
     
+
+  const  deleteport = async (id) =>{
+    const response = await fetch(`http://localhost:3000/api/ports/${id}`, {
+      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    });
+  
+    const newdelete=displayData.filter(del => del.id !== id)
+     setDisplayData(newdelete)
+  }
+
   
 
   const handleChangePage = (event, newPage) => {
@@ -74,7 +87,7 @@ export default function StickyHeadTable(props) {
                         );
                       })}
                       <Button variant="contained"  onClick={()=>handleEditPortClick(row[columns[0].id])} >Edit</Button>
-                      <Button variant="contained">Delete</Button>
+                      <Button variant="contained" onClick={() => deleteport(row.id) } >Delete</Button>
                     </TableRow>
                   );
                 })}
