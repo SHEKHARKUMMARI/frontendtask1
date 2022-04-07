@@ -18,7 +18,7 @@ const AddPort = () => {
 
     const addPortSubmitHandler = async (e)=>{
         e.preventDefault();
-        if(portData){
+        if(portData.name.trim() != "" && portData.code.trim() != "" && portData.city.trim() != "" && portData.state.trim() != "" && portData.country.trim() != ""){
             const response = await fetch(`http://localhost:3000/api/ports`, {
             method: 'POST',
             headers: {
@@ -26,8 +26,9 @@ const AddPort = () => {
             },
             body: JSON.stringify(portData) // body data type must match "Content-Type" header
         });
-       
         router.push('../port');  
+        }else{
+            alert("Please fill all the fields 🙁")
         }
       }
  
