@@ -64,8 +64,13 @@ export default function SearchAppBar({data,handleSearchResult,heading}) {
     if(searchText){
       const lowerCasedFilter = searchText.toLowerCase();
       const filteredData = data.filter(item => {
-        return Object.keys(item).some(key =>
-          item[key].toLowerCase().includes(lowerCasedFilter)
+        return Object.keys(item).some(key => {
+          console.log("keys",key)
+          console.log(typeof key)
+          return (
+            typeof item[key] === "string" && item[key].toLowerCase().includes(lowerCasedFilter)
+          )
+        }
         );
       });
       handleSearchResult(filteredData);
