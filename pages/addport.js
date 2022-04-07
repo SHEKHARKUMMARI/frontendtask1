@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import AddIcon from '@mui/icons-material/Add';
 
 
 const AddPort = () => {
@@ -61,7 +62,7 @@ const AddPort = () => {
             <TextField sx={{ m: "1rem" }} style ={{width: '100%'}} 
             className='input_field' type="text" id="standard-basic" label="Country" variant="standard" onChange={inputFieldsHandler} name='country' value={portData.country}/>
         </div>
-        <Button sx={{ m: "1rem" }} variant="contained" type="submit">ADD PORT</Button>
+        <Button endIcon={<AddIcon />} sx={{ m: "1rem" }} variant="contained" type="submit">ADD PORT</Button>
         
     </form>
   )

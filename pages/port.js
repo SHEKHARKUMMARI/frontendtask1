@@ -4,6 +4,8 @@ import BackButton from '../materialui/backbutton';
 import { useRouter } from "next/router";
 import Button from '@mui/material/Button';
 import Link from 'next/link'
+import AddIcon from '@mui/icons-material/Add';
+
 
 export const getStaticProps = async() => {
   const res = await fetch('https://staging-api.wizfreight.com/v1/ports');
@@ -62,7 +64,7 @@ useEffect( async ()=>{
     {data&& columns && <StickyHeadTable columns={columns} rows={row} heading="PORTS PAGE" handleEditClick={handleEditClick} />}
       <BackButton />
       <Link href='/addport'>
-          <Button variant="contained">Add Port</Button>
+          <Button endIcon={<AddIcon />} variant="contained">Add Port</Button>
       </Link>
       </div>
   );

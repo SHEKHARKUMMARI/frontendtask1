@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import SearchBar from "./searchbar"
 import { useState,useEffect } from 'react';
 import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 export default function StickyHeadTable(props) {
@@ -84,8 +86,8 @@ export default function StickyHeadTable(props) {
                           </TableCell> 
                         );
                       })}
-                      <Button sx={{ m: ".5rem"}} variant="contained"  onClick={()=>handleEditPortClick(row[columns[0].id])} >Edit</Button>
-                      <Button variant="contained" onClick={() => deleteport(row.id) } >Delete</Button>
+                      <Button endIcon={<EditIcon />} sx={{ m: ".5rem"}} variant="contained"  onClick={()=>handleEditPortClick(row[columns[0].id])} >Edit</Button>
+                      <Button endIcon={<DeleteIcon />} variant="contained" onClick={() => deleteport(row.id) } >Delete</Button>
                     </TableRow>
                   );
                 })}
