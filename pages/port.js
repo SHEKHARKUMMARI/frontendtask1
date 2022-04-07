@@ -63,7 +63,7 @@ useEffect( async ()=>{
     {data&& columns && <StickyHeadTable columns={columns} rows={row} heading="PORTS PAGE" handleEditClick={handleEditClick} />}
       <BackButton />
       <Link href='/addport'>
-          <Button variant="contained">Add Port</Button>
+          <Button sx={{ m: ".5rem"}} variant="contained">Add Port</Button>
       </Link>
       </div>
   );

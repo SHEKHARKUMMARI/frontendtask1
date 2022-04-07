@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
 
 const AddPort = () => {
     const [portData, setPortData] = useState({
@@ -15,7 +18,6 @@ const AddPort = () => {
     const addPortSubmitHandler = async (e)=>{
         e.preventDefault();
         if(portData){
-            console.log("event=",portData);
             const response = await fetch(`http://localhost:3000/api/ports`, {
             method: 'POST',
             headers: {
@@ -24,7 +26,6 @@ const AddPort = () => {
             body: JSON.stringify(portData) // body data type must match "Content-Type" header
         });
        
-        console.log("resp=",response.json());
         router.push('../port');  
         }
       }
@@ -35,74 +36,32 @@ const AddPort = () => {
 
 
         setPortData({...portData,[name]:value});
-        console.log(portData);
-
-        // setPortData((preValue) => {
-
-        //     if(name === 'name'){
-        //         return {
-        //             name: value,
-        //             code: preValue.code,
-        //             city: preValue.city,
-        //             state: preValue.state,
-        //             country: preValue.country,
-        //         }
-        //     }else if(name === 'code'){
-        //         return {
-        //             name: preValue.name,
-        //             code: value,
-        //             city: preValue.city,
-        //             state: preValue.state,
-        //             country: preValue.country,
-        //         }
-        //     }else if(name === 'city'){
-        //         return {
-        //             name: preValue.name,
-        //             code: preValue.code,
-        //             city: value,
-        //             state: preValue.state,
-        //             country: preValue.country,
-        //         }
-        //     }else if(name === 'state'){
-        //         return {
-        //             name: preValue.name,
-        //             code: preValue.code,
-        //             city: preValue.city,
-        //             state: value,
-        //             country: preValue.country,
-        //         }
-        //     }else if(name === 'country'){
-        //         return {
-        //             name: preValue.name,
-        //             code: preValue.code,
-        //             city: preValue.city,
-        //             state: preValue.state,
-        //             country: value,
-        //         }
-        //     }
-        // })
-
 
     }
 
   return (
-    <form onSubmit={addPortSubmitHandler}>
+    <form onSubmit={addPortSubmitHandler} className="form_container">
         <div>
-            <input type="text"  placeholder='enter name..' onChange={inputFieldsHandler} name='name' value={portData.name}/>
+            <TextField sx={{ m: "1rem" }} style ={{width: '100%'}} 
+            className='input_field' type="text" id="standard-basic" label="Name" variant="standard" onChange={inputFieldsHandler} name='name' value={portData.name}/>
         </div>
         <div>
-            <input type="text"  placeholder='enter code..' onChange={inputFieldsHandler} name='code' value={portData.code}/>
+            <TextField sx={{ m: "1rem" }} style ={{width: '100%'}}  
+             className='input_field' type="text" id="standard-basic" label="Code" variant="standard" onChange={inputFieldsHandler} name='code' value={portData.code}/>
         </div>
         <div>
-            <input type="text"  placeholder='enter city..' onChange={inputFieldsHandler} name='city' value={portData.city}/>
+            <TextField sx={{ m: "1rem" }} style ={{width: '100%'}} 
+            className='input_field' type="text" id="standard-basic" label="City" variant="standard" onChange={inputFieldsHandler} name='city' value={portData.city}/>
         </div>
         <div>
-            <input type="text"  placeholder='enter state..' onChange={inputFieldsHandler} name='state' value={portData.state}/>
+            <TextField sx={{ m: "1rem" }} style ={{width: '100%'}} 
+            className='input_field' type="text" id="standard-basic" label="State" variant="standard" onChange={inputFieldsHandler} name='state' value={portData.state}/>
         </div>
         <div>
-            <input type="text"  placeholder='enter country..' onChange={inputFieldsHandler} name='country' value={portData.country}/>
+            <TextField sx={{ m: "1rem" }} style ={{width: '100%'}} 
+            className='input_field' type="text" id="standard-basic" label="Country" variant="standard" onChange={inputFieldsHandler} name='country' value={portData.country}/>
         </div>
-        <button type="submit">ADD PORT</button>
+        <Button sx={{ m: "1rem" }} variant="contained" type="submit">ADD PORT</Button>
         
     </form>
   )

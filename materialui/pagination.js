@@ -18,7 +18,6 @@ export default function StickyHeadTable(props) {
   const [page, setPage] = React.useState(0);
   const [searchResult,setSearchResult]=useState();
   const [displayData,setDisplayData]=useState();
-  // const [wantToEdit,setWantToEdit]=useState(false);
   const rowsPerPage=10;
     
 
@@ -50,7 +49,6 @@ export default function StickyHeadTable(props) {
    }
   },[searchResult,rows])
     const handleEditPortClick=(id)=>{
-      console.log("id=",id);
       handleEditClick(id);
 
      }
@@ -86,7 +84,7 @@ export default function StickyHeadTable(props) {
                           </TableCell> 
                         );
                       })}
-                      <Button variant="contained"  onClick={()=>handleEditPortClick(row[columns[0].id])} >Edit</Button>
+                      <Button sx={{ m: ".5rem"}} variant="contained"  onClick={()=>handleEditPortClick(row[columns[0].id])} >Edit</Button>
                       <Button variant="contained" onClick={() => deleteport(row.id) } >Delete</Button>
                     </TableRow>
                   );

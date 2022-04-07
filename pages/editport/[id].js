@@ -14,7 +14,6 @@ const EditPort = () => {
   }
   const handleSubmit=async (e)=>{
     e.preventDefault();
-    console.log("event=",form);
     const response = await fetch(`http://localhost:3000/api/ports/${router.query.id}`, {
       method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       headers: {
@@ -22,7 +21,6 @@ const EditPort = () => {
       },
       body: JSON.stringify(form) // body data type must match "Content-Type" header
     });
-    console.log("resp=",response.json());
     router.push('../port');
   
   }
@@ -31,7 +29,6 @@ const EditPort = () => {
       const res=await fetch(`http://localhost:3000/api/ports/${router.query.id}`);
       const data=await res.json();
        setForm(data);
-       console.log("data=",data);
     }
     
   },[router.query.id])
