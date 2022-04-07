@@ -38,7 +38,6 @@ export default function Port({data}){
 useEffect( async ()=>{
   const res=await fetch('http://localhost:3000/api/ports');
   const data=await res.json();
-  console.log(data);
   setRow(data);
 },[])
 
@@ -63,7 +62,7 @@ useEffect( async ()=>{
     {data&& columns && <StickyHeadTable columns={columns} rows={row} heading="PORTS PAGE" handleEditClick={handleEditClick} />}
       <BackButton />
       <Link href='/addport'>
-          <Button sx={{ m: ".5rem"}} variant="contained">Add Port</Button>
+          <Button variant="contained">Add Port</Button>
       </Link>
       </div>
   );

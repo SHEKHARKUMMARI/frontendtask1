@@ -7,7 +7,7 @@ const BackButton = () => {
   return (
       <>
         <Link href="/">
-        <Button sx={{ m: "1rem" }}  variant="contained" startIcon={<ArrowBackIosIcon />}>
+        <Button sx={{ m: ".5rem" }}  variant="contained" startIcon={<ArrowBackIosIcon />}>
             BacK to Home
         </Button>
       </Link>
