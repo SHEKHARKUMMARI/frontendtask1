@@ -31,11 +31,10 @@ export default function StickyHeadTable(props) {
       },
     });
   
-    const newdelete=displayData.filter(del => del.id !== id)
-     setDisplayData(newdelete)
+    const newDelete=displayData.filter(del => del.id !== id)
+     setDisplayData(newDelete)
   }
 
-  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -80,6 +79,7 @@ export default function StickyHeadTable(props) {
                     <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                       {columns.map((column) => {
                         const value = row[column.id];
+                        console.log("row[column.id] => " ,value);
                         return (
                           <TableCell  align={column.align}>
                             {value}

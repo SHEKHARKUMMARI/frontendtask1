@@ -31,14 +31,12 @@ const AddPort = () => {
             alert("Please fill all the fields 🙁")
         }
       }
- 
+
     function inputFieldsHandler(event){
         const value = event.target.value;
         const name = event.target.name;
 
-
         setPortData({...portData,[name]:value});
-
     }
 
   return (
