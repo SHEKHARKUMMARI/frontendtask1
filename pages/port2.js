@@ -27,7 +27,7 @@ const  Port=()=>{
         <>
         <h1>Port Page</h1>
         {
-          pageData&&<Pagenation handlePageNumberChange={handlePageNumberChange} handleEditClick={handleEditClick} rows={pageData} />
+          pageData&&<Pagenation handlePageNumberChange={handlePageNumberChange} handleEditClick={handleEditClick} rows={pageData}  count={count} />
 
         }
         <Link href='/addport'>

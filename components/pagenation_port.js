@@ -38,7 +38,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
-export default function Pagenation({handlePageNumberChange,rows,handleEditClick}) {
+export default function Pagenation({handlePageNumberChange,rows,handleEditClick,count}) {
   const [pageData, setPageData] = useState();
   const [pageNumber,setPageNumber]=useState(1);
   const handleChange = (event, value) => {
@@ -52,7 +52,12 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick}
         'Content-Type': 'application/json'
       },
     });
-    handlePageNumberChange(pageNumber);
+    const res=await fetch(`http://localhost:5050/v1/ports?page=${pageNumber}&count=${count}`);
+        const data=await res.json();
+        if(data){
+            setPageData(data);
+        }
+  
   }
   useEffect(()=>{
     setPageData(rows);
