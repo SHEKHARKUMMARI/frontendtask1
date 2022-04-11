@@ -7,11 +7,11 @@ import AddIcon from '@mui/icons-material/Add';
 
 const AddPort = () => {
     const [portData, setPortData] = useState({
-        name: '',
-        code: '',
-        city: '',
-        state: '',
-        country: '',
+        Name: '',
+        Code: '',
+        City: '',
+        State: '',
+        Country: '',
     })
 
     const router = useRouter();
@@ -19,14 +19,12 @@ const AddPort = () => {
     const addPortSubmitHandler = async (e)=>{
         e.preventDefault();
         if(portData.name.trim() != "" && portData.code.trim() != "" && portData.city.trim() != "" && portData.state.trim() != "" && portData.country.trim() != ""){
-            const response = await fetch(`http://localhost:3000/api/ports`, {
+            const response = await fetch(`http://localhost:5050/v1/ports`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: {'Content-Type':'application/x-www-form-urlencoded'},
             body: JSON.stringify(portData) // body data type must match "Content-Type" header
         });
-        router.push('../port');  
+        router.push('../port2');  
         }else{
             alert("Please fill all the fields 🙁")
         }

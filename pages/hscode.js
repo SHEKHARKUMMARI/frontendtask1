@@ -1,6 +1,6 @@
 import { useState ,useEffect} from "react";
-import StickyHeadTable from "../materialui/pagination"
-import BackButton from '../materialui/backbutton'
+import StickyHeadTable from "../components/pagination"
+import BackButton from '../components/backbutton'
 
 export const getStaticProps = async() => {
   const res = await fetch("https://staging-api.wizfreight.com/v1/hs-codes");

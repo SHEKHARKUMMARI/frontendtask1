@@ -14,19 +14,19 @@ const EditPort = () => {
   }
   const handleSubmit=async (e)=>{
     e.preventDefault();
-    const response = await fetch(`http://localhost:3000/api/ports/${router.query.id}`, {
+    const response = await fetch(`http://localhost:5050/v1/ports/${router.query.id}`, {
       method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(form) // body data type must match "Content-Type" header
     });
-    router.push('../port');
+    router.push('../port2');
   
   }
   useEffect( async ()=>{
     if(router.query.id){
-      const res=await fetch(`http://localhost:3000/api/ports/${router.query.id}`);
+      const res=await fetch(`http://localhost:5050/v1/ports/${router.query.id}`);
       const data=await res.json();
        setForm(data);
     }

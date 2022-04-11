@@ -1,6 +1,6 @@
 import { useState ,useEffect} from "react";
-import StickyHeadTable from "../materialui/pagination";
-import BackButton from '../materialui/backbutton';
+import StickyHeadTable from "../components/pagination";
+import BackButton from '../components/backbutton';
 import { useRouter } from "next/router";
 import Button from '@mui/material/Button';
 import Link from 'next/link'
