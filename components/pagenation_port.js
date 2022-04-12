@@ -113,24 +113,3 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
   );
 }
 
-// // const Fun=()=>{
-// const [page, setPage] = useState(1);
-//   const handleChange = (event, value) => {
-//     setPage(value);
-//   };
-//   useEffect(()=>{
-//     console.log("page=",page);
-//   })
-// //   return (
-// //     <Stack spacing={2}>
-// //       {/* <Pagination count={10} shape="rounded" /> */}
-// //       <Pagination count={10} variant="outlined" shape="rounded" onChange={handleChange} />
-// //     </Stack>
-// //   );
-// // }
-// export default Fun
-// Name - Port name 
-// Code - Port code
-// City - Port city
-// State - Port state or province
-// Country - Port country

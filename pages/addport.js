@@ -18,17 +18,23 @@ const AddPort = () => {
 
     const addPortSubmitHandler = async (e)=>{
         e.preventDefault();
-        if(portData.name.trim() != "" && portData.code.trim() != "" && portData.city.trim() != "" && portData.state.trim() != "" && portData.country.trim() != ""){
-            const response = await fetch(`http://localhost:5050/v1/ports`, {
-            method: 'POST',
-            headers: {'Content-Type':'application/x-www-form-urlencoded'},
-            body: JSON.stringify(portData) // body data type must match "Content-Type" header
-        });
-        router.push('../port2');  
+        if(!portData.name|| !portData.code || !portData.city || !portData.state || !portData.country){
+           // body data type must match "Content-Type" header
+           console.log("else part");
+            alert("Please fill all the fields 🙁");
+    
+        
         }else{
-            alert("Please fill all the fields 🙁")
-        }
+            
+            const response = await fetch(`http://localhost:5050/v1/ports`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                body: JSON.stringify(portData) 
+            
+        })
+        router.push('./ports');
       }
+    }
 
     function inputFieldsHandler(event){
         const value = event.target.value;

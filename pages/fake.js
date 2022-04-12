@@ -1,178 +1,73 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-// import SearchBar from "./searchbar"
-import { makeStyles } from '@mui/styles';
-import { useState,useEffect } from 'react';
+import {useState,useEffect} from 'react';
+import Pagenation from '../components/pagination_fake'
+import { useRouter } from "next/router";
 import Button from '@mui/material/Button';
-import Input from '@mui/material/Input';
-import EditIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import DoneIcon from '@mui/icons-material/Done';
-
-import DeleteIcon from '@mui/icons-material/Delete';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    // marginTop: theme.spacing(3),
-    overflowX: "auto"
-  },
-  table: {
-    minWidth: 650
-  },
-  selectTableCell: {
-    width: 60
-  },
-  tableCell: {
-    width: 130,
-    height: 40
-  },
-  input: {
-    width: 130,
-    height: 40
-  }
-}));
-
-const createData = (name, calories, fat, carbs, protein) => ({
-  id: name.replace(" ", "_"),
-  name,
-  calories,
-  fat,
-  carbs,
-  protein,
-  isEditMode: false
-});
-
-const CustomTableCell = ({ row, name, onChange }) => {
-  const classes = useStyles();
-  const { isEditMode } = row;
-  return (
-    <TableCell align="left" className={classes.tableCell}>
-      {isEditMode ? (
-        <Input
-          value={row[name]}
-          name={name}
-          onChange={e => onChange(e, row)}
-          className={classes.input}
-        />
-      ) : (
-        row[name]
-      )}
-    </TableCell>
-  );
-};
-
- const Fake = () =>{
-  const [rows, setRows] = React.useState([
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0)
-  ]);
-  const [previous, setPrevious] = React.useState({});
-  const classes = useStyles();
-
-  const onToggleEditMode = id => {
-    setRows(state => {
-      return rows.map(row => {
-        if (row.id === id) {
-          return { ...row, isEditMode: !row.isEditMode };
+import Link from 'next/link'
+import AddIcon from '@mui/icons-material/Add';
+const  Port=()=>{
+    const [pageNo,setPageNo]=useState(1);
+    const [pageData,setPageData]=useState();
+    const [searchText,setSearchtext]=useState();
+    const count=3;
+    const router=useRouter();
+    const columns = [
+      { field: 'Name', headerName: 'Name', width: 130, editable: true },
+      { field: 'Code', headerName: 'Code', width: 130, editable: true },
+      {
+        field: 'City',
+        headerName: 'City',
+        editable: true
+      },
+      {
+        field: 'State',
+        headerName: 'State',
+        editable: true
+      },
+      {
+        field: 'Country',
+        headerName: 'Country',
+        editable: true
+      }
+    ];
+    
+    useEffect( async ()=>{
+        if(searchText){
+            const res=await fetch(`http://localhost:5050/v1/port?key=${searchText}&page=${pageNo}&count=${count}`);
+          const data=await res.json();
+          if(data){
+            setPageData(data);
+           }
         }
-        return row;
-      });
-    });
-  };
-
-  const onChange = (e, row) => {
-    if (!previous[row.id]) {
-      setPrevious(state => ({ ...state, [row.id]: row }));
+        else{
+            const res=await fetch(`http://localhost:5050/v1/ports?page=${pageNo}&count=${count}`);
+            const data=await res.json();
+            if(data){
+                setPageData(data);
+            }
+        }
+    },[pageNo,searchText]);
+    const handlePageNumberChange=(p)=>{
+        setPageNo(p);
     }
-    const value = e.target.value;
-    const name = e.target.name;
-    const { id } = row;
-    const newRows = rows.map(row => {
-      if (row.id === id) {
-        return { ...row, [name]: value };
-      }
-      return row;
-    });
-    setRows(newRows);
-  };
+    const handleEditClick=(id)=>{
+        router.push(`./editport/${id}`);
+     }
+     const handleSearchTextChange=(text)=>{
+         setSearchtext(text);
+     }
+    return (
+        <>
+        <h1>Ports
+        <Link href='/addport'> 
+          <Button endIcon={<AddIcon />} variant="contained">Add Port</Button>
+       </Link>
+       </h1>
+        {
+          pageData&&<Pagenation handlePageNumberChange={handlePageNumberChange} handleEditClick={handleEditClick} columns={columns} rows={pageData} searchText={searchText} count={count} handleSearchTextChange={handleSearchTextChange} />
 
-  const onRevert = id => {
-    const newRows = rows.map(row => {
-      if (row.id === id) {
-        return previous[id] ? previous[id] : row;
-      }
-      return row;
-    });
-    setRows(newRows);
-    setPrevious(state => {
-      delete state[id];
-      return state;
-    });
-    onToggleEditMode(id);
-  };
-
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table} aria-label="caption table">
-        <caption>A barbone structure table example with a caption</caption>
-        <TableHead>
-          <TableRow>
-            <TableCell align="left" />
-            <TableCell align="left">Dessert (100g serving)</TableCell>
-            <TableCell align="left">Calories</TableCell>
-            <TableCell align="left">Fat&nbsp;(g)</TableCell>
-            <TableCell align="left">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="left">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.id}>
-              <TableCell className={classes.selectTableCell}>
-                {row.isEditMode ? (
-                  <>
-                    <IconButton
-                      aria-label="done"
-                      onClick={() => onToggleEditMode(row.id)}
-                    >
-                      <DoneIcon />
-                    </IconButton>
-                    <IconButton
-                      aria-label="revert"
-                      onClick={() => onRevert(row.id)}
-                    >
-                      {/* <RevertIcon /> */}
-                    </IconButton>
-                  </>
-                ) : (
-                  <IconButton
-                    aria-label="delete"
-                    onClick={() => onToggleEditMode(row.id)}
-                  >
-                    <EditIcon />
-                  </IconButton>
-                )}
-              </TableCell>
-              <CustomTableCell {...{ row, name: "name", onChange }} />
-              <CustomTableCell {...{ row, name: "calories", onChange }} />
-              <CustomTableCell {...{ row, name: "fat", onChange }} />
-              <CustomTableCell {...{ row, name: "carbs", onChange }} />
-              <CustomTableCell {...{ row, name: "protein", onChange }} />
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  );
+        }
+        
+        </>
+    )
 }
-
-export default Fake;
+export default Port

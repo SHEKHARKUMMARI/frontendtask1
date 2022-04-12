@@ -1,73 +1,53 @@
-import { useState ,useEffect} from "react";
-import StickyHeadTable from "../components/pagination";
-import BackButton from '../components/backbutton';
+import {useState,useEffect} from 'react';
+import Pagenation from '../components/pagenation_fake'
 import { useRouter } from "next/router";
 import Button from '@mui/material/Button';
 import Link from 'next/link'
 import AddIcon from '@mui/icons-material/Add';
-
-
-export const getStaticProps = async() => {
-  const res = await fetch('https://staging-api.wizfreight.com/v1/ports');
-  const data = await res.json();
-  return {
-      props: {
-          data,
-      }
-  }
-}  
-
-export default function Port({data}){
-    const [row, setRow] = useState([]);
-    const [columns, setColumns] = useState([]);
+const  Port=()=>{
+    const [pageNo,setPageNo]=useState(1);
+    const [pageData,setPageData]=useState();
+    const [searchText,setSearchtext]=useState();
+    const count=3;
     const router=useRouter();
-    
-  // useEffect(()=>{
-  //  if(data){
-  //      const port_row=data.ports.map((curElem)=> { 
-  //         const Name=curElem.name;
-  //         const Code=curElem.info.city.info.country.code ;
-  //         const City=curElem.info.city.name;
-  //         const State=curElem.info.state;
-  //         const Country=curElem.info.city.info.country.name;
-  //          return {Name,Code,City,State,Country}
-  //      })
-  //      setRow(port_row);
-  //  }      
-   
-  // },[data])
-  
-useEffect( async ()=>{
-  const res=await fetch('http://localhost:3000/api/ports');
-  const data=await res.json();
-  setRow(data);
-},[])
-
-
-  useEffect(() => {
-    if(row){
-      const tempData = row.length !== 0 ? Object.keys(row[0]).map(ele => {
-        return {
-          "id": ele,
-          "label": ele,
+    useEffect( async ()=>{
+        if(searchText){
+            const res=await fetch(`http://localhost:5050/v1/port?key=${searchText}&page=${pageNo}&count=${count}`);
+          const data=await res.json();
+          if(data){
+            setPageData(data);
+           }
         }
-      }): [];
-      setColumns(tempData);
+        else{
+            const res=await fetch(`http://localhost:5050/v1/ports?page=${pageNo}&count=${count}`);
+            const data=await res.json();
+            if(data){
+                setPageData(data);
+            }
+        }
+    },[pageNo,searchText]);
+    const handlePageNumberChange=(p)=>{
+        setPageNo(p);
     }
- }, [row])
-
-  const handleEditClick=(id)=>{
-           router.push(`./editport/${id}`);
-  }
-  return (
-    <div className="App">
-    {data&& columns && <StickyHeadTable columns={columns} rows={row} heading="PORTS PAGE" handleEditClick={handleEditClick} />}
-      <BackButton />
-      <Link href='/addport'>
+    const handleEditClick=(id)=>{
+        router.push(`./editport/${id}`);
+     }
+     const handleSearchTextChange=(text)=>{
+         setSearchtext(text);
+     }
+    return (
+        <>
+        <h1>Ports
+        <Link href='/addport'> 
           <Button endIcon={<AddIcon />} variant="contained">Add Port</Button>
-      </Link>
-      </div>
-  );
-}
+       </Link>
+       </h1>
+        {
+          pageData&&<Pagenation handlePageNumberChange={handlePageNumberChange} handleEditClick={handleEditClick} rows={pageData} searchText={searchText} count={count} handleSearchTextChange={handleSearchTextChange} />
 
-  
+        }
+        
+        </>
+    )
+}
+export default Port

@@ -25,8 +25,6 @@ const  Port=()=>{
                 setPageData(data);
             }
         }
-        console.log("data for page=",pageData);
-        console.log("pagenumber ",pageNo);
     },[pageNo,searchText]);
     const handlePageNumberChange=(p)=>{
         setPageNo(p);
