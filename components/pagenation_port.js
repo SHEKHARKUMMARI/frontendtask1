@@ -13,6 +13,8 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import TextField from '@mui/material/TextField';
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -36,9 +38,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 
+//localhost:5050/v1/port?key=Chennai&page=1&count=8
 
-
-export default function Pagenation({handlePageNumberChange,rows,handleEditClick,count}) {
+export default function Pagenation({handlePageNumberChange,rows,handleEditClick,count,searchText,handleSearchTextChange}) {
   const [pageData, setPageData] = useState();
   const [pageNumber,setPageNumber]=useState(1);
   const handleChange = (event, value) => {
@@ -59,6 +61,12 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
         }
   
   }
+  const handleSearchFieldChange=(e)=>{
+        handleSearchTextChange(e.target.value);
+  }
+  useEffect(()=>{
+  console.log("search text=",searchText)
+  },[searchText])
   useEffect(()=>{
     setPageData(rows);
   },[rows]);
@@ -79,8 +87,9 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
             <StyledTableCell align="left">City</StyledTableCell>
             <StyledTableCell align="left">State</StyledTableCell>
             <StyledTableCell align="left">Country</StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
+            <TextField id="outlined-basic" label="Outlined" variant="outlined" value={searchText} onChange={handleSearchFieldChange} />
           </TableRow>
+
         </TableHead>
         <TableBody>
           { pageData&&pageData.Ports.map((row) => (
@@ -98,7 +107,7 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
       </Table>
     </TableContainer>
     <Stack spacing={2}>    {/* <Pagination count={10} shape="rounded" /> */}
-    <Pagination count={pageData?.totalNumberOfPages} variant="outlined" shape="rounded" onChange={handleChange} />
+    <Pagination count={pageData?.totalNumberOfPages} variant="outlined" shape="rounded"  onChange={handleChange} />
     </Stack>
     </>
   );

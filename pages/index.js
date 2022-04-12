@@ -17,7 +17,7 @@ export default function Home() {
         <Link href="/hscode"><a className={styles.page_font}>HS CODES</a></Link>
       </div>
       <div className={styles.home_page}>
-        <Link href="/port"><a className={styles.page_font}>PORTS  PAGE</a></Link>
+        <Link href="/ports"><a className={styles.page_font}>PORTS  PAGE</a></Link>
       </div>
 
       </div>
