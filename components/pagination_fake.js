@@ -50,7 +50,6 @@ export default function ValueParserSetterGrid({columns,rows}) {
     <div style={{ height: 400, width: '100%' }}>
       <DataGrid rows={disp} columns={columns}  />
       <Stack spacing={2}>    {/* <Pagination count={10} shape="rounded" /> */}
-    <Pagination count={pageData?.totalNumberOfPages} variant="outlined" shape="rounded"  onChange={handleChange} />
     </Stack>
     </div>
   );

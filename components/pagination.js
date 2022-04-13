@@ -12,15 +12,25 @@ import { useState,useEffect } from 'react';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
 
 
 export default function StickyHeadTable(props) {
   const {rows, columns ,heading,handleEditClick} = props;
-
-  const [page, setPage] = React.useState(0);
+  const [open, setOpen] = useState(false);
+  const [page, setPage] = useState(0);
   const [searchResult,setSearchResult]=useState();
   const [displayData,setDisplayData]=useState();
   const rowsPerPage=10;
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+
     
 
   const  deleteport = async (id) =>{

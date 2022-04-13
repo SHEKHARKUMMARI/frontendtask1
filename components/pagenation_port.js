@@ -14,6 +14,10 @@ import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -46,21 +50,37 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
   const handleChange = (event, value) => {
     setPageNumber(value);
   };
-  const  deleteport = async (id) =>{
-    console.log("delete id=",id);
-    await fetch(`http://localhost:5050/v1/ports/${id}`, {
-      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        'Content-Type': 'application/json'
-      },
+
+
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
+
+  const deleteport = async (id) =>{
+
+    await  fetch(`http://localhost:5050/v1/ports/${id}`,{
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'}
     });
-    const res=await fetch(`http://localhost:5050/v1/ports?page=${pageNumber}&count=${count}`);
-        const data=await res.json();
-        if(data){
-            setPageData(data);
-        }
-  
+    setOpen(true)
+    const res= await fetch(`http://localhost:5050/v1/ports?page=${pageNumber}&count=${count}`);
+    const data = await res.json();
+
+    if(data){
+      setPageData(data)
+    }
   }
+  
   const handleSearchFieldChange=(e)=>{
         handleSearchTextChange(e.target.value);
   }
@@ -70,9 +90,9 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
   useEffect(()=>{
     setPageData(rows);
   },[rows]);
-  const handleEditPortClick=(id)=>{
-    handleEditClick(id);
-   }
+  // const handleEditPortClick=(id)=>{
+  //   handleEditClick(id);
+  //  }
    useEffect(()=>{
        handlePageNumberChange(pageNumber);
    },[pageNumber]);
@@ -88,11 +108,11 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
             <StyledTableCell align="left">State</StyledTableCell>
             <StyledTableCell align="left">Country</StyledTableCell>
             <TextField id="outlined-basic" label="Outlined" variant="outlined" value={searchText} onChange={handleSearchFieldChange} />
+          
           </TableRow>
-
         </TableHead>
         <TableBody>
-          { pageData&&pageData.Ports.map((row) => (
+          { pageData&&pageData.Ports ?.map((row) => (
             <StyledTableRow key={row.ID}>
               <StyledTableCell align="left">{row.Name}</StyledTableCell>
               <StyledTableCell align="left">{row.Code}</StyledTableCell>
@@ -101,6 +121,11 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
               <StyledTableCell align="left">{row.Country}</StyledTableCell>
             {/* <Button endIcon={<EditIcon />} sx={{ m: ".5rem"}} variant="contained" onClick={()=>handleEditPortClick(row.ID)} >Edit</Button> */}
             <Button endIcon={<DeleteIcon />} variant="contained" onClick={() => deleteport(row.ID) } >Delete</Button>
+            {open && <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
+           <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+              Successfully Deleted The Port
+          </Alert>
+      </Snackbar>}
             </StyledTableRow>
           ))}
         </TableBody>

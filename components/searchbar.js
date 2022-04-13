@@ -54,7 +54,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar({data,handleSearchResult,heading}) {
   const [searchText,setSearchText]=useState("");
-  
+
   const handleInputChange=(event)=>{
     setSearchText(event.target.value);
   }

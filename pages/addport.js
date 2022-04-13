@@ -1,11 +1,37 @@
+import * as React from 'react';
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import AddIcon from '@mui/icons-material/Add';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
 
 
 const AddPort = () => {
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const [open, setOpen] = useState(false);
+
+  const [open1,setOpen1]=useState(false);
+
+ 
+
+
+  
+
+
+    const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen(false);
+    };
+
     const [portData, setPortData] = useState({
         Name: '',
         Code: '',
@@ -21,18 +47,18 @@ const AddPort = () => {
         if(!portData.name|| !portData.code || !portData.city || !portData.state || !portData.country){
            // body data type must match "Content-Type" header
            console.log("else part");
-            alert("Please fill all the fields 🙁");
-    
+           
+            setOpen(true);
         
         }else{
-            
             const response = await fetch(`http://localhost:5050/v1/ports`, {
                 method: 'POST',
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body: JSON.stringify(portData) 
-            
         })
+        setOpen1(true)
         router.push('./ports');
+
       }
     }
 
@@ -65,8 +91,21 @@ const AddPort = () => {
             <TextField sx={{ m: "1rem" }} style ={{width: '100%'}} 
             className='input_field' type="text" id="standard-basic" label="Country" variant="standard" onChange={inputFieldsHandler} name='country' value={portData.country}/>
         </div>
-        <Button endIcon={<AddIcon />} sx={{ m: "1rem" }} variant="contained" type="submit">ADD PORT</Button>
+        <Button  endIcon={<AddIcon />} sx={{ m: "1rem" }} variant="contained" type="submit">ADD PORT</Button>
+        <div>
+        {open && <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+           <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+              Please Fill All The Fields
+          </Alert>
+      </Snackbar>}
+      {open1 && <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              Successfully Added YOUR PORT
+          </Alert>
+      </Snackbar>}
         
+    </div>
+
     </form>
   )
 }
