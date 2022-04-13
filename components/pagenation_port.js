@@ -16,8 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
-
+import SearchBar from "material-ui-search-bar";
+import classes from '../styles/Home.module.css'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -107,10 +107,29 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
             <StyledTableCell align="left">City</StyledTableCell>
             <StyledTableCell align="left">State</StyledTableCell>
             <StyledTableCell align="left">Country</StyledTableCell>
-            <TextField id="outlined-basic" label="Outlined" variant="outlined" value={searchText} onChange={handleSearchFieldChange} />
-          
+            {/* <TextField 
+            id="outlined-basic"
+            label="Outlined"
+            variant="outlined"
+            value={searchText}
+            onChange={handleSearchFieldChange}
+            /> */}
+            <div className={classes.search} >
+             <TextField 
+            sx={{ m: 2 }} 
+            id="standard-basic"
+             label="Search Here"
+              variant="standard"
+              fullWidth
+              value={searchText}
+              onChange={handleSearchFieldChange}
+               /> 
+            </div>
+           
+
           </TableRow>
         </TableHead>
+        
         <TableBody>
           { pageData&&pageData.Ports ?.map((row) => (
             <StyledTableRow key={row.ID}>
@@ -125,7 +144,7 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
               Successfully Deleted The Port
           </Alert>
-      </Snackbar>}
+          </Snackbar>}
             </StyledTableRow>
           ))}
         </TableBody>
