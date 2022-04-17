@@ -2,15 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify:false,
-  basePath: '/wizfreight.com',
-  async rewrites() {
-    return [
-      {
-        source: '/ports',
-        destination: '/wizfreight.com/ports',
-      },
-    ]
-  },
+  // basePath: '/wizfreight.com',
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/ports',
+  //       destination: '/wizfreight.com/ports',
+  //     },
+  //   ]
+  // },
 
 }
 

@@ -64,7 +64,6 @@ const  Port=()=>{
        </h1>
         {
           pageData&&<Pagenation handlePageNumberChange={handlePageNumberChange} handleEditClick={handleEditClick} columns={columns} rows={pageData} searchText={searchText} count={count} handleSearchTextChange={handleSearchTextChange} />
-
         }
         
         </>

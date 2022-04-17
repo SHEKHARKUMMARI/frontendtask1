@@ -11,12 +11,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-import EditIcon from '@mui/icons-material/Edit';
+// import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import SearchBar from "material-ui-search-bar";
 import classes from '../styles/Home.module.css'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -107,13 +106,6 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
             <StyledTableCell align="left">City</StyledTableCell>
             <StyledTableCell align="left">State</StyledTableCell>
             <StyledTableCell align="left">Country</StyledTableCell>
-            {/* <TextField 
-            id="outlined-basic"
-            label="Outlined"
-            variant="outlined"
-            value={searchText}
-            onChange={handleSearchFieldChange}
-            /> */}
             <div className={classes.search} >
              <TextField 
             sx={{ m: 2 }} 

@@ -3,14 +3,17 @@ FROM node:17-alpine3.12 AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+# RUN yarn install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM node:17-alpine3.12 AS builder
 WORKDIR /app
 COPY . .
-COPY --from=deps /app/node_modules ./node_modules
-RUN yarn build && yarn install --production --ignore-scripts --prefer-offline
+
+RUN npm install
+RUN npm run build
+# COPY --from=deps /app/node_modules ./node_modules
+# RUN yarn build && yarn install --production --ignore-scripts --prefer-offline
 
 # Production image, copy all the files and run next
 FROM node:17-alpine3.12 AS runner
@@ -36,3 +39,6 @@ ENV PORT 3000
 
 
 CMD ["node_modules/.bin/next", "start"]
+  
+
+
