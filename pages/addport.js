@@ -32,6 +32,16 @@ const AddPort = () => {
       setOpen(false);
     };
 
+
+
+
+    const handleClose1 = (event, reason) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setOpen1(false);
+    };
+
     const [portData, setPortData] = useState({
         Name: '',
         Code: '',
@@ -56,9 +66,11 @@ const AddPort = () => {
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body: JSON.stringify(portData) 
         })
-        setOpen1(true)
-        router.push('./ports');
 
+        if(response.ok === true ){
+          setOpen1(true)
+          router.push('./ports');
+        }
       }
     }
 
@@ -98,7 +110,7 @@ const AddPort = () => {
               Please Fill All The Fields
           </Alert>
       </Snackbar>}
-      {open1 && <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose}>
+      {open1 && <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
               Successfully Added YOUR PORT
           </Alert>

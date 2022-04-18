@@ -11,7 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-// import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
@@ -64,6 +64,11 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
       }
       setOpen(false);
     };
+
+
+    // const handleEditClick=(id)=>{
+    //           router.push(`./editport/${id}`);
+    //       }
 
   const deleteport = async (id) =>{
 
@@ -130,7 +135,7 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
               <StyledTableCell align="left">{row.City}</StyledTableCell>
               <StyledTableCell align="left">{row.State}</StyledTableCell>
               <StyledTableCell align="left">{row.Country}</StyledTableCell>
-            {/* <Button endIcon={<EditIcon />} sx={{ m: ".5rem"}} variant="contained" onClick={()=>handleEditPortClick(row.ID)} >Edit</Button> */}
+            <Button endIcon={<EditIcon />} sx={{ m: ".5rem"}} variant="contained" onClick={()=>handleEditPortClick(row.ID)} >Edit</Button>
             <Button endIcon={<DeleteIcon />} variant="contained" onClick={() => deleteport(row.ID) } >Delete</Button>
             {open && <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
