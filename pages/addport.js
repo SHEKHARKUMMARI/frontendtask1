@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -32,16 +32,6 @@ const AddPort = () => {
       setOpen(false);
     };
 
-
-
-
-    const handleClose1 = (event, reason) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setOpen1(false);
-    };
-
     const [portData, setPortData] = useState({
         Name: '',
         Code: '',
@@ -66,14 +56,20 @@ const AddPort = () => {
                 headers: {'Content-Type':'application/x-www-form-urlencoded'},
                 body: JSON.stringify(portData) 
         })
-
-        if(response.ok === true ){
+        if(response.ok){
           setOpen1(true)
-          router.push('./ports');
         }
+
       }
     }
-
+    useEffect(()=>{
+      if(open1){
+        setTimeout(()=>{
+          router.push('./ports');
+          setOpen1(false);
+        },1000)
+      }
+    },[open1]);
     function inputFieldsHandler(event){
         const value = event.target.value;
         const name = event.target.name;
@@ -110,7 +106,7 @@ const AddPort = () => {
               Please Fill All The Fields
           </Alert>
       </Snackbar>}
-      {open1 && <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose1}>
+      {open1 && <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
               Successfully Added YOUR PORT
           </Alert>
