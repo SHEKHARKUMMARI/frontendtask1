@@ -17,7 +17,7 @@ const AddPort = () => {
 
   const [open, setOpen] = useState(false);
 
-  const [open1,setOpen1]=useState(false);
+  const [successPopUp,setSuccessPopUp] = useState(false);
 
  
 
@@ -57,19 +57,19 @@ const AddPort = () => {
                 body: JSON.stringify(portData) 
         })
         if(response.ok){
-          setOpen1(true)
+          setSuccessPopUp(true)
         }
 
       }
     }
     useEffect(()=>{
-      if(open1){
+      if(successPopUp){
         setTimeout(()=>{
           router.push('./ports');
-          setOpen1(false);
+          setSuccessPopUp(false);
         },1000)
       }
-    },[open1]);
+    },[successPopUp]);
     function inputFieldsHandler(event){
         const value = event.target.value;
         const name = event.target.name;
@@ -106,7 +106,7 @@ const AddPort = () => {
               Please Fill All The Fields
           </Alert>
       </Snackbar>}
-      {open1 && <Snackbar open={open1} autoHideDuration={6000} onClose={handleClose}>
+      {successPopUp && <Snackbar open={successPopUp} autoHideDuration={6000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
               Successfully Added YOUR PORT
           </Alert>

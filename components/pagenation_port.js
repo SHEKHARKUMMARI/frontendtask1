@@ -135,7 +135,7 @@ export default function Pagenation({handlePageNumberChange,rows,handleEditClick,
               <StyledTableCell align="left">{row.City}</StyledTableCell>
               <StyledTableCell align="left">{row.State}</StyledTableCell>
               <StyledTableCell align="left">{row.Country}</StyledTableCell>
-            <Button endIcon={<EditIcon />} sx={{ m: ".5rem"}} variant="contained" onClick={()=>handleEditPortClick(row.ID)} >Edit</Button>
+            <Button endIcon={<EditIcon />} sx={{ m: ".5rem"}} variant="contained" onClick={()=>handleEditClick(row.ID)} >Edit</Button>
             <Button endIcon={<DeleteIcon />} variant="contained" onClick={() => deleteport(row.ID) } >Delete</Button>
             {open && <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
            <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>

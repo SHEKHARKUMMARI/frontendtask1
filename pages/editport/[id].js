@@ -2,9 +2,28 @@ import React ,{useState,useEffect} from 'react';
 import TextField from '@mui/material/TextField';
 import { useRouter } from 'next/router';
 import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
 const EditPort = () => {
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const [EditSuccess,setEditSuccess] =useState(false);
+
+
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setEditSuccess(false);
+  };
+
+
   const[form,setForm]=useState({name:''});
   const router=useRouter();
   const handleChange=(e)=>{
@@ -21,9 +40,28 @@ const EditPort = () => {
       },
       body: JSON.stringify(form) // body data type must match "Content-Type" header
     });
-    router.push('../port2');
+
+    if(response.ok){
+      setEditSuccess(true)
+    }
+   
   
   }
+
+
+  useEffect(()=>{
+    if(EditSuccess){
+      setTimeout(()=>{
+        setEditSuccess(true);
+        router.push('../ports');
+      },1000)
+    }
+  },[EditSuccess]);
+
+
+
+
+
   useEffect( async ()=>{
     if(router.query.id){
       const res=await fetch(`http://localhost:5050/v1/ports/${router.query.id}`);
@@ -78,6 +116,12 @@ const EditPort = () => {
       <Button  sx={{m:'1rem'}} type='submit' variant="contained">Submit</Button>
 
       {/* name,code,city,state,country */}
+
+      {EditSuccess && <Snackbar open={EditSuccess} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              Successfully Edited YOUR PORT
+          </Alert>
+      </Snackbar>}
     </form>
     </>
   )
